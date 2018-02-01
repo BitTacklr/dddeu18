@@ -1,0 +1,13 @@
+{
+  "definitions": {
+    "dignisol.helloworld.Ping": {
+      "title": "Ping",
+      "type": "object",
+      "properties": {
+        "Pong": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

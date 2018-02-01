@@ -1,0 +1,8 @@
+syntax = "proto3"; // https://developers.google.com/protocol-buffers/docs/proto3
+
+package dignisol.helloworld;
+
+message Ping
+{
+    string Pong = 1;
+}

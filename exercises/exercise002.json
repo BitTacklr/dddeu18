@@ -1,0 +1,56 @@
+{
+  "definitions": {
+    "dignisol.organization.AllStaff": {
+      "title": "AllStaff",
+      "type": "object",
+      "properties": {
+        "StaffMembers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/dignisol.organization.Staff"
+          }
+        }
+      }
+    },
+    "dignisol.organization.Staff": {
+      "title": "Staff",
+      "type": "object",
+      "properties": {
+        "Id": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "ResidencyId": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "FullName": {
+          "type": "string"
+        },
+        "Role": {
+          "$ref": "#/definitions/dignisol.organization.StaffRole"
+        }
+      }
+    },
+    "dignisol.organization.StaffRole": {
+      "title": "StaffRole",
+      "type": "string",
+      "enum": [
+        "Manager",
+        "Doctor",
+        "HeadNurse",
+        "Nurse",
+        "Caregiver",
+        "Physiotherapist",
+        "Animator",
+        "Cook",
+        "KitchenHelp",
+        "Technician",
+        "Gardener",
+        "Janitor"
+      ]
+    }
+  }
+}

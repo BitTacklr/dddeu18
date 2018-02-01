@@ -1,0 +1,379 @@
+{
+  "definitions": {
+    "dignisol.caredelivery.nutrition.Meal": {
+      "title": "Meal",
+      "type": "object",
+      "properties": {
+        "Description": {
+          "type": "string"
+        }
+      }
+    },
+    "dignisol.caredelivery.nutrition.MealOfDay": {
+      "title": "MealOfDay",
+      "type": "object",
+      "properties": {
+        "Description": {
+          "type": "string"
+        },
+        "NoChoice": {
+          "$ref": "#/definitions/dignisol.caredelivery.nutrition.NoChoiceMeal"
+        },
+        "SingleChoice": {
+          "$ref": "#/definitions/dignisol.caredelivery.nutrition.SingleChoiceMeal"
+        },
+        "MultipleChoice": {
+          "$ref": "#/definitions/dignisol.caredelivery.nutrition.MultipleChoiceMeal"
+        },
+        "QuantifiedChoice": {
+          "$ref": "#/definitions/dignisol.caredelivery.nutrition.QuantifiedChoiceMeal"
+        }
+      }
+    },
+    "dignisol.caredelivery.nutrition.NoChoiceMeal": {
+      "title": "NoChoiceMeal",
+      "type": "object",
+      "properties": {
+        "Description": {
+          "type": "string"
+        }
+      }
+    },
+    "dignisol.caredelivery.nutrition.SingleChoiceMeal": {
+      "title": "SingleChoiceMeal",
+      "type": "object",
+      "properties": {
+        "Choices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/dignisol.caredelivery.nutrition.Meal"
+          }
+        }
+      }
+    },
+    "dignisol.caredelivery.nutrition.MultipleChoiceMeal": {
+      "title": "MultipleChoiceMeal",
+      "type": "object",
+      "properties": {
+        "Choices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/dignisol.caredelivery.nutrition.Meal"
+          }
+        }
+      }
+    },
+    "dignisol.caredelivery.nutrition.Quantity": {
+      "title": "Quantity",
+      "type": "object",
+      "properties": {
+        "Description": {
+          "type": "string"
+        },
+        "MinQuantity": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "MaxQuantity": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "DefaultQuantity": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        }
+      }
+    },
+    "dignisol.caredelivery.nutrition.QuantifiedChoiceMeal": {
+      "title": "QuantifiedChoiceMeal",
+      "type": "object",
+      "properties": {
+        "Description": {
+          "type": "string"
+        },
+        "Quantities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/dignisol.caredelivery.nutrition.Quantity"
+          }
+        }
+      }
+    },
+    "dignisol.caredelivery.nutrition.PublishDayMenu": {
+      "title": "PublishDayMenu",
+      "type": "object",
+      "properties": {
+        "Id": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "ResidencyId": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "AuthorId": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "Date": {
+          "type": "string"
+        },
+        "MealsOfDay": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/dignisol.caredelivery.nutrition.MealOfDay"
+          }
+        }
+      }
+    },
+    "dignisol.caredelivery.nutrition.DayMenu": {
+      "title": "DayMenu",
+      "type": "object",
+      "properties": {
+        "Date": {
+          "type": "string"
+        },
+        "MealsOfDay": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/dignisol.caredelivery.nutrition.MealOfDay"
+          }
+        }
+      }
+    },
+    "dignisol.caredelivery.nutrition.PublishWeekMenu": {
+      "title": "PublishWeekMenu",
+      "type": "object",
+      "properties": {
+        "Id": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "ResidencyId": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "AuthorId": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "Monday": {
+          "$ref": "#/definitions/dignisol.caredelivery.nutrition.DayMenu"
+        },
+        "Tuesday": {
+          "$ref": "#/definitions/dignisol.caredelivery.nutrition.DayMenu"
+        },
+        "Wednesday": {
+          "$ref": "#/definitions/dignisol.caredelivery.nutrition.DayMenu"
+        },
+        "Thursday": {
+          "$ref": "#/definitions/dignisol.caredelivery.nutrition.DayMenu"
+        },
+        "Friday": {
+          "$ref": "#/definitions/dignisol.caredelivery.nutrition.DayMenu"
+        },
+        "Saturday": {
+          "$ref": "#/definitions/dignisol.caredelivery.nutrition.DayMenu"
+        },
+        "Sunday": {
+          "$ref": "#/definitions/dignisol.caredelivery.nutrition.DayMenu"
+        }
+      }
+    },
+    "dignisol.caredelivery.nutrition.ChosenSingleChoiceMeal": {
+      "title": "ChosenSingleChoiceMeal",
+      "type": "object",
+      "properties": {
+        "Choice": {
+          "$ref": "#/definitions/dignisol.caredelivery.nutrition.Meal"
+        }
+      }
+    },
+    "dignisol.caredelivery.nutrition.ChosenMultipleChoiceMeal": {
+      "title": "ChosenMultipleChoiceMeal",
+      "type": "object",
+      "properties": {
+        "Choices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/dignisol.caredelivery.nutrition.Meal"
+          }
+        }
+      }
+    },
+    "dignisol.caredelivery.nutrition.ChosenQuantity": {
+      "title": "ChosenQuantity",
+      "type": "object",
+      "properties": {
+        "Description": {
+          "type": "string"
+        },
+        "Quantity": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        }
+      }
+    },
+    "dignisol.caredelivery.nutrition.ChosenQuantifiedChoiceMeal": {
+      "title": "ChosenQuantifiedChoiceMeal",
+      "type": "object",
+      "properties": {
+        "Description": {
+          "type": "string"
+        },
+        "Quantities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/dignisol.caredelivery.nutrition.ChosenQuantity"
+          }
+        }
+      }
+    },
+    "dignisol.caredelivery.nutrition.ChosenMealOfDay": {
+      "title": "ChosenMealOfDay",
+      "type": "object",
+      "properties": {
+        "Description": {
+          "type": "string"
+        },
+        "SingleChoice": {
+          "$ref": "#/definitions/dignisol.caredelivery.nutrition.ChosenSingleChoiceMeal"
+        },
+        "MultipleChoice": {
+          "$ref": "#/definitions/dignisol.caredelivery.nutrition.ChosenMultipleChoiceMeal"
+        },
+        "QuantifiedChoice": {
+          "$ref": "#/definitions/dignisol.caredelivery.nutrition.ChosenQuantifiedChoiceMeal"
+        }
+      }
+    },
+    "dignisol.caredelivery.nutrition.ChooseMeal": {
+      "title": "ChooseMeal",
+      "type": "object",
+      "properties": {
+        "ResidentId": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "ResidencyId": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "MenuId": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "Date": {
+          "type": "string"
+        },
+        "MealOfDay": {
+          "$ref": "#/definitions/dignisol.caredelivery.nutrition.ChosenMealOfDay"
+        }
+      }
+    },
+    "dignisol.caredelivery.nutrition.CancelMeal": {
+      "title": "CancelMeal",
+      "type": "object",
+      "properties": {
+        "ResidentId": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "ResidencyId": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "MenuId": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "Date": {
+          "type": "string"
+        },
+        "MealOfDay": {
+          "type": "string"
+        }
+      }
+    },
+    "dignisol.caredelivery.nutrition.ChooseMealForResident": {
+      "title": "ChooseMealForResident",
+      "type": "object",
+      "properties": {
+        "ResidentId": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "ResidencyId": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "StaffId": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "MenuId": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "Date": {
+          "type": "string"
+        },
+        "MealOfDay": {
+          "$ref": "#/definitions/dignisol.caredelivery.nutrition.ChosenMealOfDay"
+        }
+      }
+    },
+    "dignisol.caredelivery.nutrition.CancelMealForResident": {
+      "title": "CancelMealForResident",
+      "type": "object",
+      "properties": {
+        "ResidentId": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "ResidencyId": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "StaffId": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "MenuId": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "Date": {
+          "type": "string"
+        },
+        "MealOfDay": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

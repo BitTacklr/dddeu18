@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package dignisol.organization;
+
+message AllStaff {
+    repeated Staff StaffMembers = 1;
+}
+
+enum StaffRole {
+    Manager = 1; Doctor = 2; HeadNurse = 3;
+    Nurse = 4; Caregiver = 5;
+    Physiotherapist = 6; Animator = 7;
+    Cook = 8; KitchenHelp = 9;
+    Technician = 10; Gardener = 11;
+    Janitor = 12;
+}
+
+message Staff {
+    int32 Id = 1;           // the surrogate identifier of a staff member
+    int32 ResidencyId = 2;  // residency where the staff member works
+    string FullName = 3;    // the full name of the staff member
+    StaffRole Role = 4;     // the role the staff member has
+}
+
+/* Consider that each residency
+    * has 1 manager, 1 janitor, 1 cook, 1 technician, 1 gardener.
+    * has the following staff distribution per 15 residents of a nursing home:
+        * 1 head nurse, 1 cook and/or kitchen help, 1 animator,
+        * 3 nursing and/or caregiving staff members of which at least 1 nurse.
+    * has the following staff distribution per 30 residents of a retirement home:
+        * 5 nursing staff members of which at least 1 head nurse,
+        * 5 caregiving staff members,
+        * 1 cook and/or kitchen help, 1 physiotherapist, 2 animators.
+    * has at least 1 doctor as of 100 residents.
+*/

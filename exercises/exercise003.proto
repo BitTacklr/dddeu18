@@ -1,0 +1,180 @@
+syntax = "proto3";
+
+package dignisol.caredelivery.nutrition;
+
+/* for cooks */
+
+message MealOfDay
+{
+    // e.g. breakfast, lunch, dinner
+    string Description = 1;
+    oneof Meal {
+        // the resident does not get to choose anything
+        NoChoiceMeal NoChoice = 2;
+        // the resident can pick one of the meal choices
+        SingleChoiceMeal SingleChoice = 3;
+        // the resident can pick multiple of the meal choices
+        MultipleChoiceMeal MultipleChoice = 4;
+        // resident can quantify part of the meal
+        QuantifiedChoiceMeal QuantifiedChoice = 5;
+    }
+}
+
+message NoChoiceMeal {
+     // e.g. sandwhiches with cheese
+    string Description = 1;
+}
+
+message Meal {
+    // e.g. steak with fries
+    string Description = 1;
+}
+
+message SingleChoiceMeal
+{
+    // e.g. tomate-crevette or vol-au-vent
+    repeated Meal Choices = 1;
+}
+
+message MultipleChoiceMeal
+{
+    //e.g. soup of the day, tomate-crevette or vol-au-vent, pudding
+    repeated Meal Choices = 1;
+}
+
+message Quantity
+{
+    // e.g. 3 slices of cheese
+    string Description = 1;
+    int32 MinQuantity = 2;
+    int32 MaxQuantity = 3;
+    int32 DefaultQuantity = 4;
+}
+
+message QuantifiedChoiceMeal
+{
+    // e.g. bread with 3 slices of cheese
+    string Description = 1;
+    repeated Quantity Quantities = 2;
+}
+
+// -- behavior
+
+message PublishDayMenu
+{
+    int32 Id = 1;          // identifies the menu
+    int32 ResidencyId = 2; // identifies the residency
+    int32 AuthorId = 3;    // identifies the cook
+    string Date = 4;       // the date the menu is for
+    repeated MealOfDay MealsOfDay = 5; // each meal of the day
+}
+
+message DayMenu {
+    string Date = 1;       // the date the menu is for
+    repeated MealOfDay MealsOfDay = 2; // each meal of the day
+}
+
+message PublishWeekMenu
+{
+    int32 Id = 1;           // identifies the menu
+    int32 ResidencyId = 2;  // identifies the residency
+    int32 AuthorId = 3;     // identifies the cook
+    DayMenu Monday = 4;     // the meal on each day of the week ...
+    DayMenu Tuesday = 5;    
+    DayMenu Wednesday = 6;
+    DayMenu Thursday = 7;
+    DayMenu Friday = 8;
+    DayMenu Saturday = 9;
+    DayMenu Sunday = 10;
+}
+
+/* for residents */
+
+message ChosenSingleChoiceMeal
+{
+    // e.g. vol-au-vent
+    Meal Choice = 1;
+}
+
+message ChosenMultipleChoiceMeal
+{
+    //e.g. tomate-crevette, pudding
+    repeated Meal Choices = 1;
+}
+
+message ChosenQuantity
+{
+    // e.g. 3 slices of cheese
+    string Description = 1;
+    int32 Quantity = 2;
+}
+
+message ChosenQuantifiedChoiceMeal
+{
+    // e.g. bread, 3 slices of cheese
+    string Description = 1;
+    repeated ChosenQuantity Quantities = 2;
+}
+
+message ChosenMealOfDay
+{
+    // e.g. breakfast, lunch, dinner
+    string Description = 1;
+    oneof Meal {
+        // the resident can pick one of the meal choices
+        ChosenSingleChoiceMeal SingleChoice = 2;
+        // the resident can pick multiple of the meal choices
+        ChosenMultipleChoiceMeal MultipleChoice = 3;
+        // resident can quantify part of the meal
+        ChosenQuantifiedChoiceMeal QuantifiedChoice = 4;
+    }
+}
+
+// -- behavior
+
+message ChooseMeal
+{
+    int32 ResidentId = 1;   // identifies the resident the meal is for
+    int32 ResidencyId = 2;  // identifies the residency
+    int32 MenuId = 3;       // identifies the menu
+    string Date = 4;        // identifies when the meal is
+    ChosenMealOfDay MealOfDay = 5; // the choice made
+}
+
+message CancelMeal
+{
+    int32 ResidentId = 1;   // identifies the resident the meal is for
+    int32 ResidencyId = 2;  // identifies the residency
+    int32 MenuId = 3;       // identifies the menu
+    string Date = 4;        // identfies when the meal is
+    string MealOfDay = 5;   // the meal of the day to cancel
+}
+
+/* for staff in case the resident is not capable to choose */
+
+message ChooseMealForResident
+{
+    int32 ResidentId = 1;   // identifies the resident the meal is for
+    int32 ResidencyId = 2;  // identifies the residency
+    int32 StaffId = 3;      // identifies the staff member who chooses for the resident
+    int32 MenuId = 4;       // identifies the menu
+    string Date = 5;        // identifies the date of the meal
+    ChosenMealOfDay MealOfDay = 6; // the choice made
+}
+
+message CancelMealForResident
+{
+    int32 ResidentId = 1;  // identifies the resident the meal is for
+    int32 ResidencyId = 2;  // identifies the residency
+    int32 StaffId = 3;     // identifies the staff member who cancels for the resident
+    int32 MenuId = 4;      // identifies the menu
+    string Date = 5;       // identifies the date of the meal
+    string MealOfDay = 6;  // the meal of the day to cancel
+}
+
+/* Consider
+    * that some cooks publish weekly menus, others day menus,
+    * 5% of all meals get cancelled e.g. due to resident becoming ill or other exceptional conditions,
+    * that in nursing homes 80% of the meals are chosen by care givers,
+    * that in retirement homes 95% of the meals are chosen by residents.
+*/

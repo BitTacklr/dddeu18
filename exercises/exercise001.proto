@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package dignisol.organization;
+
+message AllResidencies {
+    repeated Residency Residencies = 1;
+}
+
+enum ResidencyType { NursingHome = 1; RetirementHome = 0; }
+
+message Residency {
+    int32 Id = 1;          // the surrogate identifier of the residency
+    string Name = 2;       // the name of the residency
+    Address Address = 3;   // the address of the residency
+    string Country = 4;    // the country iso code
+    int32 Capacity = 5;    // the number of possible residents
+    ResidencyType Type = 6;// a nursing or retirement home
+}
+
+message Address {
+    // Think street and number, zip or postcode and city, name of country
+    repeated string Lines = 1;
+}
+
+message AllResidents {
+    repeated Resident Residents = 1;
+}
+
+message Resident {
+    int32 Id = 1;         // the surrogate identifier of a resident
+    string FullName = 2;  // the full name of a resident
+}
+
+/* Consider
+    * that each residency has a minimum capacity of 30,
+    * that it doesn't make sense to have more residents in a residency than its capacity,
+    * making your generation logic configurable and/or randomized (e.g. which countries, # residencies per country, bounded random capacity),
+    * making your data "realistic" (e.g. local names of people and addresses differ per country),
+    * making use of https://www.mockaroo.com/, https://www.generatedata.com/, a lib your ecosystem provides (e.g. fake.js - https://github.com/marak/Faker.js/).
+*/

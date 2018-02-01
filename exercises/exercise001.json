@@ -1,0 +1,90 @@
+{
+  "definitions": {
+    "dignisol.organization.AllResidencies": {
+      "title": "AllResidencies",
+      "type": "object",
+      "properties": {
+        "Residencies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/dignisol.organization.Residency"
+          }
+        }
+      }
+    },
+    "dignisol.organization.Residency": {
+      "title": "Residency",
+      "type": "object",
+      "properties": {
+        "Id": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "Name": {
+          "type": "string"
+        },
+        "Address": {
+          "$ref": "#/definitions/dignisol.organization.Address"
+        },
+        "Country": {
+          "type": "string"
+        },
+        "Capacity": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "Type": {
+          "$ref": "#/definitions/dignisol.organization.ResidencyType"
+        }
+      }
+    },
+    "dignisol.organization.Address": {
+      "title": "Address",
+      "type": "object",
+      "properties": {
+        "Lines": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "dignisol.organization.AllResidents": {
+      "title": "AllResidents",
+      "type": "object",
+      "properties": {
+        "Residents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/dignisol.organization.Resident"
+          }
+        }
+      }
+    },
+    "dignisol.organization.Resident": {
+      "title": "Resident",
+      "type": "object",
+      "properties": {
+        "Id": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "FullName": {
+          "type": "string"
+        }
+      }
+    },
+    "dignisol.organization.ResidencyType": {
+      "title": "ResidencyType",
+      "type": "string",
+      "enum": [
+        "NursingHome",
+        "RetirementHome"
+      ]
+    }
+  }
+}
