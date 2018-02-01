@@ -7,12 +7,12 @@ message AllStaff {
 }
 
 enum StaffRole {
-    Manager = 1; Doctor = 2; HeadNurse = 3;
-    Nurse = 4; Caregiver = 5;
-    Physiotherapist = 6; Animator = 7;
-    Cook = 8; KitchenHelp = 9;
-    Technician = 10; Gardener = 11;
-    Janitor = 12;
+    Manager = 0; Doctor = 1; HeadNurse = 2;
+    Nurse = 3; Caregiver = 4;
+    Physiotherapist = 5; Animator = 6;
+    Cook = 7; KitchenHelp = 8;
+    Technician = 9; Gardener = 10;
+    Janitor = 11;
 }
 
 message Staff {
