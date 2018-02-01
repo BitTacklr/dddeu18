@@ -6,7 +6,7 @@ message AllResidencies {
     repeated Residency Residencies = 1;
 }
 
-enum ResidencyType { NursingHome = 1; RetirementHome = 0; }
+enum ResidencyType { NursingHome = 0; RetirementHome = 1; }
 
 message Residency {
     int32 Id = 1;          // the surrogate identifier of the residency
